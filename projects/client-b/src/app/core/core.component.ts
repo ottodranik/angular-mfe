@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
     <div id="client-b">
       <div class="card">
         <div class="content">
-          <a routerLink="page1">Passenger Search</a> | <a routerLink="page2">Details</a>
+          <a routerLink="/b/page1">Passenger Search</a> | <a routerLink="/b/page2">Details</a>
         </div>
       </div>
       <router-outlet></router-outlet>

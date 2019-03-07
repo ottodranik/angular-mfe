@@ -10,17 +10,19 @@ import { RouterModule } from '@angular/router';
 import { EmptyComponent } from './empty/empty.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CoreComponent } from './core/core.component';
+import { ClientBStoreModule } from './store';
 
 @NgModule({
   imports: [
+    ClientBStoreModule,
     BrowserModule,
     RouterModule.forRoot([
-      { path: 'client-b', component: CoreComponent, children: [
+      { path: 'b', component: CoreComponent, children: [
         { path: 'page1', component: Page1Component },
         { path: 'page2', component: Page2Component },
       ]},
       { path: '**', component: EmptyComponent }
-    ], { useHash: true }),
+    ]),
     ReactiveFormsModule
   ],
   declarations: [

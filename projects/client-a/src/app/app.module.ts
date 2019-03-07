@@ -12,17 +12,20 @@ import { ClientAWidgetComponent } from './client-a-widget/client-a-widget.compon
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { CoreComponent } from './core/core.component';
 import { PushPipe } from './push.pipe';
+import { ElementZoneStrategyFactory } from 'elements-zone-strategy';
+import { ClientAStoreModule } from './store';
 
 @NgModule({
   imports: [
+    ClientAStoreModule,
     BrowserModule,
     RouterModule.forRoot([
-      { path: 'client-a', component: CoreComponent, children: [
+      { path: 'a', component: CoreComponent, children: [
         { path: 'page1', component: Page1Component },
         { path: 'page2', component: Page2Component },
       ]},
       { path: '**', component: EmptyComponent }
-    ], { useHash: true }),
+    ]),
     ReactiveFormsModule
   ],
   declarations: [
@@ -48,10 +51,15 @@ export class AppModule {
   }
 
   ngDoBootstrap() {
-    const appElement = createCustomElement(AppComponent, { injector: this.injector})
-    customElements.define('client-a', appElement);
-
-    const widgetElement = createCustomElement(ClientAWidgetComponent, { injector: this.injector})
-    customElements.define('client-a-widget', widgetElement);
+    // if (!customElements.get('client-a')) {
+      const strategyFactoryApp = new ElementZoneStrategyFactory(AppComponent, this.injector);
+      const appElement = createCustomElement(AppComponent, { injector: this.injector, strategyFactory: strategyFactoryApp })
+      customElements.define('client-a', appElement);
+    // }
+    // if (!customElements.get('client-a-widget')) {
+      const strategyFactoryWidget = new ElementZoneStrategyFactory(ClientAWidgetComponent, this.injector);
+      const widgetElement = createCustomElement(ClientAWidgetComponent, { injector: this.injector, strategyFactory: strategyFactoryWidget })
+      customElements.define('client-a-widget', widgetElement);
+    // }
   }
 }

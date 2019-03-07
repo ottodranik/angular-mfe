@@ -12,6 +12,7 @@ export class SidebarComponent {
     }
 
     sendState() {
+        console.log('set state');
         this.stateService.setState('Info from Shell');
     }
 }
