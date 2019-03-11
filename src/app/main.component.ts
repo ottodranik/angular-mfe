@@ -24,7 +24,7 @@ import { ReducerManager } from '@ngrx/store';
 export class MainComponent {
 
   private listenFunc;
-  
+
   constructor(
     private stateService: StateService,
     private router: Router,
@@ -59,7 +59,7 @@ export class MainComponent {
       element: 'test-custom',
       id: 'test-custom'
     },
-    
+
   };
 
   ngOnInit() {
@@ -90,7 +90,7 @@ export class MainComponent {
       script.src = configItem.path;
       body.appendChild(script);
     }
-    
+
     const element: HTMLElement = document.createElement(configItem.element);
     content.appendChild(element);
 
@@ -100,12 +100,12 @@ export class MainComponent {
     //   this.handleMessage(event.detail)
     // });
 
-    if (!customElements.get(name)) {
-      element.addEventListener('cool-event', (event: any) => {
-        console.log('Receive state 2', event);
-        this.handleMessage(event.detail)
-      });
-    }
+    // if (!customElements.get(name)) {
+    //   element.addEventListener('cool-event', (event: any) => {
+    //     console.log('Receive state 2', event);
+    //     this.handleMessage(event.detail)
+    //   });
+    // }
     element.setAttribute('state', 'init');
     element.setAttribute('urlTouch', 'false');
     element.setAttribute('id', configItem.id || name);

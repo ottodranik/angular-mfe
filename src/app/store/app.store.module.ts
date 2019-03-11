@@ -7,11 +7,15 @@ import { EffectsModule } from '@ngrx/effects';
 // import {RouterStateSerializer, StoreRouterConnectingModule} from '@ngrx/router-store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../../environments/environment';
+import { ClientBStoreModule } from 'projects/client-b/src/app/store';
+import { ClientAStoreModule } from 'projects/client-a/src/app/store';
 // import {CustomSerializer} from '@app/shared/utils';
 
 @NgModule({
   imports: [
     CommonModule,
+    ClientBStoreModule,
+    ClientAStoreModule,
     StoreModule.forRoot(
       AppStoreReducers.reducersToken,
       { metaReducers: AppStoreReducers.metaReducers }

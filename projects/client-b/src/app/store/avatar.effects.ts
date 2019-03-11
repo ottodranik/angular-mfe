@@ -23,42 +23,21 @@ export class AvatarStoreEffects {
     private store$: Store<AvatarStoreState.State>,
   ) {}
 
-  // @Effect()
-  // loadAvatarListEffect$: Observable<Action> = this.actions$
-  //   .pipe(
-  //     ofType(
-  //       actions.AvatarListActions.ActionTypes.FETCH_DATA,
-  //       actions.AvatarListActions.ActionTypes.CHANGE_PAGINATION,
-  //       actions.AvatarListActions.ActionTypes.CHANGE_FILTER,
-  //       actions.AvatarListActions.ActionTypes.CHANGE_SORTING
-  //     ),
-  //     /* Get LAST values of ListQuery */
-  //     withLatestFrom(this.store$.select(AvatarStoreSelectors.getListQuery)),
+  @Effect()
+  loadAvatarListEffect$: Observable<Action> = this.actions$
+    .pipe(
+      ofType(
+        actions.AvatarListActions.ActionTypes.FETCH_DATA,
+        actions.AvatarListActions.ActionTypes.CHANGE_PAGINATION,
+        actions.AvatarListActions.ActionTypes.CHANGE_FILTER,
+        actions.AvatarListActions.ActionTypes.CHANGE_SORTING
+      ),
+      /* Get LAST values of ListQuery */
+      withLatestFrom(this.store$.select(AvatarStoreSelectors.getListQuery)),
 
-  //     /* Use LAST values of ListQuery */
-  //     switchMap(([action, listQuery]) => {
-  //       this.store$.dispatch(new actions.AvatarListActions.LoadRequest());
-  //       return this.dataService
-  //         .updateAvatarList(listQuery)
-  //         .pipe(
-  //           map((data) =>
-  //             new actions.AvatarListActions.LoadSuccess({
-  //               avatars: data.avatars.map(avatar => ({
-  //                 ...avatar,
-  //                 connections: avatar.connections.reduce((res, item) => {
-  //                   res[item.type] = item.enabled;
-  //                   return res;
-  //                 }, {})
-  //               })),
-  //               totalItemsCount: data.totalItemsCount
-  //             })
-  //           ),
-  //           catchError(error =>
-  //             observableOf(new actions.AvatarListActions.LoadFailure({ error }))
-  //           )
-  //         );
-  //     })
-  //   );
+      /* Use LAST values of ListQuery */
+      map(([action, listQuery]) => new actions.AvatarListActions.LoadRequest())
+    );
 
   // @Effect()
   // createAvatarEffect$: Observable<Action> = this.actions$

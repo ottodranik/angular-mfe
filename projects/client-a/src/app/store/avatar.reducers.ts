@@ -1,28 +1,28 @@
 import { combineReducers, ActionReducerMap } from '@ngrx/store';
 import {
-  AvatarListActions,
-  AvatarCrudActions,
-  AvatarAdditionalActions,
-  AvatarImportActions,
-  AvatarConnectionsActions,
-  AvatarExportActions
+  ClientAListActions,
+  ClientACrudActions,
+  ClientAAdditionalActions,
+  ClientAImportActions,
+  ClientAConnectionsActions,
+  ClientAExportActions
 } from './actions';
 import { initialState, State } from './avatar.state';
-// import { Avatar, AvatarConnection, AvatarListQueryModel, AvatarDetails, AvatarCity, AvatarProxy } from '../models/avatar.model';
-// import { AvatarStatus } from '../avatar.enums';
+// import { ClientA, ClientAConnection, ClientAListQueryModel, ClientADetails, ClientACity, ClientAProxy } from '../models/ClientA.model';
+// import { ClientAStatus } from '../ClientA.enums';
 import { InjectionToken } from '@angular/core';
 // import { SseCrawlingErrors } from '@app/shared/shared.enums';
 
 export function list (
   state = initialState.list,
-  action: AvatarListActions.Actions
+  action: ClientAListActions.Actions
 ): any[] {
   switch (action.type) {
-    case AvatarListActions.ActionTypes.LOAD_FAILURE: {
+    case ClientAListActions.ActionTypes.LOAD_FAILURE: {
       return state;
     }
-    case AvatarListActions.ActionTypes.LOAD_SUCCESS: {
-      return action.payload.avatars;
+    case ClientAListActions.ActionTypes.LOAD_SUCCESS: {
+      return action.payload.ClientAs;
     }
     default: {
       return state;
@@ -32,14 +32,14 @@ export function list (
 
 export function avatarsTotal (
   state = initialState.avatarsTotal,
-  action: AvatarListActions.Actions
+  action: ClientAListActions.Actions
 ): number {
   switch (action.type) {
-    case AvatarListActions.ActionTypes.LOAD_REQUEST:
-    case AvatarListActions.ActionTypes.LOAD_FAILURE: {
+    case ClientAListActions.ActionTypes.LOAD_REQUEST:
+    case ClientAListActions.ActionTypes.LOAD_FAILURE: {
       return state;
     }
-    case AvatarListActions.ActionTypes.LOAD_SUCCESS: {
+    case ClientAListActions.ActionTypes.LOAD_SUCCESS: {
       return action.payload.totalItemsCount;
     }
     default: {
@@ -50,20 +50,20 @@ export function avatarsTotal (
 
 export function isLoading (
   state = initialState.isLoading,
-  action: AvatarListActions.Actions | AvatarCrudActions.Actions | AvatarConnectionsActions.Actions
+  action: ClientAListActions.Actions | ClientACrudActions.Actions | ClientAConnectionsActions.Actions
 ): boolean {
   switch (action.type) {
-    case AvatarListActions.ActionTypes.LOAD_REQUEST:
-    case AvatarCrudActions.ActionTypes.LOAD_DETAILS_REQUEST:
-    case AvatarConnectionsActions.ActionTypes.LOAD_CONNECTIONS_REQUEST: {
+    case ClientAListActions.ActionTypes.LOAD_REQUEST:
+    case ClientACrudActions.ActionTypes.LOAD_DETAILS_REQUEST:
+    case ClientAConnectionsActions.ActionTypes.LOAD_CONNECTIONS_REQUEST: {
       return true;
     }
-    case AvatarListActions.ActionTypes.LOAD_FAILURE:
-    case AvatarCrudActions.ActionTypes.LOAD_DETAILS_FAILURE:
-    case AvatarConnectionsActions.ActionTypes.LOAD_CONNECTIONS_FAILURE:
-    case AvatarListActions.ActionTypes.LOAD_SUCCESS:
-    case AvatarCrudActions.ActionTypes.LOAD_DETAILS_SUCCESS:
-    case AvatarConnectionsActions.ActionTypes.LOAD_CONNECTIONS_SUCCESS: {
+    case ClientAListActions.ActionTypes.LOAD_FAILURE:
+    case ClientACrudActions.ActionTypes.LOAD_DETAILS_FAILURE:
+    case ClientAConnectionsActions.ActionTypes.LOAD_CONNECTIONS_FAILURE:
+    case ClientAListActions.ActionTypes.LOAD_SUCCESS:
+    case ClientACrudActions.ActionTypes.LOAD_DETAILS_SUCCESS:
+    case ClientAConnectionsActions.ActionTypes.LOAD_CONNECTIONS_SUCCESS: {
       return false;
     }
     default: {
@@ -74,20 +74,20 @@ export function isLoading (
 
 export function error (
   state = initialState.isLoading,
-  action: AvatarListActions.Actions | AvatarCrudActions.Actions | AvatarAdditionalActions.Actions
+  action: ClientAListActions.Actions | ClientACrudActions.Actions | ClientAAdditionalActions.Actions
 ): any {
   switch (action.type) {
-    case AvatarListActions.ActionTypes.LOAD_REQUEST:
-    case AvatarListActions.ActionTypes.LOAD_SUCCESS:
-    case AvatarCrudActions.ActionTypes.LOAD_DETAILS_REQUEST:
-    case AvatarCrudActions.ActionTypes.LOAD_DETAILS_SUCCESS: {
+    case ClientAListActions.ActionTypes.LOAD_REQUEST:
+    case ClientAListActions.ActionTypes.LOAD_SUCCESS:
+    case ClientACrudActions.ActionTypes.LOAD_DETAILS_REQUEST:
+    case ClientACrudActions.ActionTypes.LOAD_DETAILS_SUCCESS: {
       return null;
     }
-    case AvatarListActions.ActionTypes.LOAD_FAILURE:
-    case AvatarCrudActions.ActionTypes.LOAD_DETAILS_FAILURE: {
+    case ClientAListActions.ActionTypes.LOAD_FAILURE:
+    case ClientACrudActions.ActionTypes.LOAD_DETAILS_FAILURE: {
       return action.payload.error;
     }
-    case AvatarAdditionalActions.ActionTypes.CLEAR_AVATAR_DETAILS: {
+    case ClientAAdditionalActions.ActionTypes.CLEAR_AVATAR_DETAILS: {
       return initialState.isLoading;
     }
     default: {
@@ -98,23 +98,23 @@ export function error (
 
 export function details (
   state = initialState.details,
-  action: AvatarCrudActions.Actions | AvatarImportActions.Actions | AvatarAdditionalActions.Actions | AvatarExportActions.Actions
+  action: ClientACrudActions.Actions | ClientAImportActions.Actions | ClientAAdditionalActions.Actions | ClientAExportActions.Actions
 ): any {
   switch (action.type) {
-    case AvatarCrudActions.ActionTypes.LOAD_DETAILS_REQUEST:
-    case AvatarCrudActions.ActionTypes.LOAD_DETAILS_FAILURE: {
+    case ClientACrudActions.ActionTypes.LOAD_DETAILS_REQUEST:
+    case ClientACrudActions.ActionTypes.LOAD_DETAILS_FAILURE: {
       return state;
     }
-    case AvatarCrudActions.ActionTypes.LOAD_DETAILS_SUCCESS: {
+    case ClientACrudActions.ActionTypes.LOAD_DETAILS_SUCCESS: {
       return action.payload;
     }
-    case AvatarAdditionalActions.ActionTypes.CLEAR_AVATAR_DETAILS: {
+    case ClientAAdditionalActions.ActionTypes.CLEAR_AVATAR_DETAILS: {
       return initialState.details;
     }
     /**
-    * Get valid current avatar state
+    * Get valid current ClientA state
     */
-   case AvatarAdditionalActions.ActionTypes.GET_CURRENT_STATE_SUCCESS: {
+   case ClientAAdditionalActions.ActionTypes.GET_CURRENT_STATE_SUCCESS: {
      return state
        ? {
          ...state,
@@ -130,14 +130,14 @@ export function details (
 
 export function connections (
   state = initialState.connections,
-  action: AvatarConnectionsActions.Actions | AvatarAdditionalActions.Actions | AvatarImportActions.Actions
+  action: ClientAConnectionsActions.Actions | ClientAAdditionalActions.Actions | ClientAImportActions.Actions
 ): object {
   switch (action.type) {
-    case AvatarConnectionsActions.ActionTypes.LOAD_CONNECTIONS_REQUEST:
-    case AvatarConnectionsActions.ActionTypes.LOAD_CONNECTIONS_FAILURE: {
+    case ClientAConnectionsActions.ActionTypes.LOAD_CONNECTIONS_REQUEST:
+    case ClientAConnectionsActions.ActionTypes.LOAD_CONNECTIONS_FAILURE: {
       return state;
     }
-    case AvatarConnectionsActions.ActionTypes.LOAD_CONNECTIONS_SUCCESS: {
+    case ClientAConnectionsActions.ActionTypes.LOAD_CONNECTIONS_SUCCESS: {
       /**
        * Serialize connections array to object
        */
@@ -149,7 +149,7 @@ export function connections (
         return res;
       }, {});
     }
-    case AvatarConnectionsActions.ActionTypes.UPDATE_CONNECTIONS_REQUEST: {
+    case ClientAConnectionsActions.ActionTypes.UPDATE_CONNECTIONS_REQUEST: {
       const current = state[action.payload.connectionId] || {};
       return {
         ...state,
@@ -161,7 +161,7 @@ export function connections (
         }
       };
     }
-    case AvatarConnectionsActions.ActionTypes.UPDATE_CONNECTIONS_SUCCESS: {
+    case ClientAConnectionsActions.ActionTypes.UPDATE_CONNECTIONS_SUCCESS: {
       const current = state[action.payload.connectionId] || {};
       return {
         ...state,
@@ -172,7 +172,7 @@ export function connections (
         }
       };
     }
-    case AvatarConnectionsActions.ActionTypes.UPDATE_CONNECTIONS_WRONG_CREDENTIALS: {
+    case ClientAConnectionsActions.ActionTypes.UPDATE_CONNECTIONS_WRONG_CREDENTIALS: {
       const current = state[action.payload.connectionId] || {};
       return {
         ...state,
@@ -184,7 +184,7 @@ export function connections (
         }
       };
     }
-    case AvatarConnectionsActions.ActionTypes.UPDATE_CONNECTIONS_FAILURE: {
+    case ClientAConnectionsActions.ActionTypes.UPDATE_CONNECTIONS_FAILURE: {
       const current = state[action.payload.connectionId] || {};
       return {
         ...state,
@@ -194,7 +194,7 @@ export function connections (
         }
       };
     }
-    case AvatarAdditionalActions.ActionTypes.CLEAR_AVATAR_DETAILS: {
+    case ClientAAdditionalActions.ActionTypes.CLEAR_AVATAR_DETAILS: {
       return initialState.connections;
     }
     default: {
@@ -205,14 +205,14 @@ export function connections (
 
 export function proxies (
   state = initialState.proxies,
-  action: AvatarConnectionsActions.Actions
+  action: ClientAConnectionsActions.Actions
 ): any[] {
   switch (action.type) {
-    case AvatarConnectionsActions.ActionTypes.LOAD_CONNECTIONS_REQUEST:
-    case AvatarConnectionsActions.ActionTypes.LOAD_CONNECTIONS_FAILURE: {
+    case ClientAConnectionsActions.ActionTypes.LOAD_CONNECTIONS_REQUEST:
+    case ClientAConnectionsActions.ActionTypes.LOAD_CONNECTIONS_FAILURE: {
       return state;
     }
-    case AvatarConnectionsActions.ActionTypes.LOAD_CONNECTIONS_SUCCESS: {
+    case ClientAConnectionsActions.ActionTypes.LOAD_CONNECTIONS_SUCCESS: {
       return action.payload.proxies;
     }
     default: {
@@ -223,13 +223,14 @@ export function proxies (
 
 export function currentTab (
   state = initialState.currentTab,
-  action: AvatarAdditionalActions.Actions
+  action: ClientAAdditionalActions.Actions | ClientAListActions.Actions
 ): number {
   switch (action.type) {
-    case AvatarAdditionalActions.ActionTypes.CHANGE_TAB: {
-      return action.payload.tabIndex;
+    case ClientAAdditionalActions.ActionTypes.CHANGE_TAB:
+    case ClientAListActions.ActionTypes.CHANGE_PAGINATION: {
+      return action.payload.page;
     }
-    case AvatarAdditionalActions.ActionTypes.CLEAR_AVATAR_DETAILS: {
+    case ClientAAdditionalActions.ActionTypes.CLEAR_AVATAR_DETAILS: {
       return initialState.currentTab;
     }
     default: {
@@ -240,14 +241,14 @@ export function currentTab (
 
 export function isCreateBtnDisabled (
   state = initialState.isCreateBtnDisabled,
-  action: AvatarCrudActions.Actions
+  action: ClientACrudActions.Actions
 ): boolean {
   switch (action.type) {
-    case AvatarCrudActions.ActionTypes.CREATE_NEW_REQUEST: {
+    case ClientACrudActions.ActionTypes.CREATE_NEW_REQUEST: {
       return true;
     }
-    case AvatarCrudActions.ActionTypes.CREATE_NEW_SUCCESS:
-    case AvatarCrudActions.ActionTypes.CREATE_NEW_FAILURE: {
+    case ClientACrudActions.ActionTypes.CREATE_NEW_SUCCESS:
+    case ClientACrudActions.ActionTypes.CREATE_NEW_FAILURE: {
       return false;
     }
     default: {
@@ -258,17 +259,17 @@ export function isCreateBtnDisabled (
 
 export function cities (
   state = initialState.cities,
-  action: AvatarAdditionalActions.Actions
+  action: ClientAAdditionalActions.Actions
 ): any[] {
   switch (action.type) {
-    case AvatarAdditionalActions.ActionTypes.SEARCH_CITIES_FAILURE: {
+    case ClientAAdditionalActions.ActionTypes.SEARCH_CITIES_FAILURE: {
       return state;
     }
-    case AvatarAdditionalActions.ActionTypes.SEARCH_CITIES_SUCCESS: {
+    case ClientAAdditionalActions.ActionTypes.SEARCH_CITIES_SUCCESS: {
       return action.payload;
     }
-    case AvatarAdditionalActions.ActionTypes.SEARCH_CITIES_REQUEST:
-    case AvatarAdditionalActions.ActionTypes.CLEAR_CITIES: {
+    case ClientAAdditionalActions.ActionTypes.SEARCH_CITIES_REQUEST:
+    case ClientAAdditionalActions.ActionTypes.CLEAR_CITIES: {
       return initialState.cities;
     }
     default: {
@@ -302,7 +303,7 @@ export const reducersProvider = [
   { provide: reducersToken, useFactory: getReducers }
 ];
 
-export const getAvatars = (state: State): any[] => state.list;
+export const getClientAs = (state: State): any[] => state.list;
 export const getSelectedDetails = (state: State): any => state.details;
 export const getCurrentTab = (state: State): number => state.currentTab;
 export const getConnections = (state: State): object => state.connections;

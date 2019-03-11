@@ -11,16 +11,6 @@ import * as fromAvatar from './avatar.reducers';
 export const selectAvatarState =
   createFeatureSelector<State>('avatar');
 
-export const getAvatars = createSelector(
-  selectAvatarState,
-  fromAvatar.getAvatars
-);
-
-export const getAvatarsTotal = createSelector(
-  selectAvatarState,
-  fromAvatar.getAvatarsTotal
-);
-
 export const getError = createSelector(
   selectAvatarState,
   fromAvatar.getError

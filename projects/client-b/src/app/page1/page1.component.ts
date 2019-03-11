@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AvatarListActions } from '../store/actions';
+import { AvatarStoreState } from '../store';
+import { Store } from '@ngrx/store';
 
 @Component({
   template: `
@@ -8,8 +11,8 @@ import { Component, OnInit } from '@angular/core';
       <h2 class="title">Passenger Search</h2>
   </div>
   <div class="content">
-  
- 
+
+
       <div class="form-group">
          <label>Title:</label>
          <input name="to" value="Mag." class="form-control">
@@ -23,16 +26,28 @@ import { Component, OnInit } from '@angular/core';
           <label>Last Name:</label>
           <input name="to" value="" class="form-control">
       </div>
-  
+
       <div class="form-group">
-          <button 
-              class="btn btn-default">Search</button>
-  
+          <button
+              class="btn btn-default" (click)="onDisaptch()">Search</button>
+              {{i}}
           </div>
-  
+
   </div>
   </div>
   `
 })
 export class Page1Component  {
+
+  i = 0;
+
+  constructor(
+    private store$: Store<AvatarStoreState.State>
+  ) {}
+
+  onDisaptch() {
+    this.store$.dispatch(
+      new AvatarListActions.ChangePagination({ pageNumber: ++this.i })
+    );
+  }
 }

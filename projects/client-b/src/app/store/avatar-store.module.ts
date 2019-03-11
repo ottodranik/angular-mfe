@@ -10,15 +10,19 @@ import { environment } from 'projects/client-a/src/environments/environment';
 @NgModule({
   imports: [
     CommonModule,
-    // StoreModule.forRoot({}),
-    // EffectsModule.forRoot([]),
-    // StoreModule.forFeature('clientB', reducersToken),
-    // EffectsModule.forFeature([AvatarStoreEffects]),
-    // StoreDevtoolsModule.instrument({
-    //   logOnly: environment.production,
-    //   maxAge: 50
-    // }),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    StoreModule.forFeature('clientB', reducersToken),
+    EffectsModule.forFeature([AvatarStoreEffects]),
+    StoreDevtoolsModule.instrument({
+      logOnly: environment.production,
+      maxAge: 50
+    }),
   ],
-  // providers: [reducersProvider]
+  providers: [reducersProvider]
 })
-export class ClientBStoreModule {}
+export class ClientBStoreModule {
+  constructor() {
+    console.log(ClientBStoreModule);
+  }
+}

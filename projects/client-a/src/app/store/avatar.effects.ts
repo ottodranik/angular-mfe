@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 // import { SocialNetworks } from '../avatar.enums';
 
 @Injectable()
-export class AvatarStoreEffects {
+export class ClientAStoreEffects {
 
   constructor(
     // private dataService: AvatarService,

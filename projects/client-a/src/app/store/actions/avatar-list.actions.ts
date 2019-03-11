@@ -2,19 +2,19 @@ import { Action } from '@ngrx/store';
 // import { AvatarListModel } from '../../models/avatar.model';
 
 export enum ActionTypes {
-  LOAD_REQUEST = '[Avatar][List] Load Data Request',
-  LOAD_FAILURE = '[Avatar][List] Load Data Failure',
-  LOAD_SUCCESS = '[Avatar][List] Load Data Success',
-  FETCH_DATA = '[Avatar][List] Fetch Data With Current Filters',
-  CHANGE_PAGINATION = '[Avatar][List] Change Pagination',
-  CHANGE_FILTER = '[Avatar][List] Change Filters',
-  CHANGE_SORTING = '[Avatar][List] Change Sorting',
-  CLEAR_LIST_QUERY = '[Avatar][List] Clear Query Input',
+  LOAD_REQUEST = '[ClientA][List] Load Data Request',
+  LOAD_FAILURE = '[ClientA][List] Load Data Failure',
+  LOAD_SUCCESS = '[ClientA][List] Load Data Success',
+  FETCH_DATA = '[ClientA][List] Fetch Data With Current Filters',
+  CHANGE_PAGINATION = '[ClientA][List] Change Pagination',
+  CHANGE_FILTER = '[ClientA][List] Change Filters',
+  CHANGE_SORTING = '[ClientA][List] Change Sorting',
+  CLEAR_LIST_QUERY = '[ClientA][List] Clear Query Input',
 }
 
 export class ChangePagination implements Action {
   readonly type = ActionTypes.CHANGE_PAGINATION;
-  constructor(public payload: object) {}
+  constructor(public payload: any) {}
 }
 
 export class ChangeFilter implements Action {

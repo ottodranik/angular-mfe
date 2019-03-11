@@ -3,7 +3,7 @@ import { Component, ViewEncapsulation, Input, Output, EventEmitter, OnInit, OnCh
 import { Router } from '@angular/router';
 import { environment } from '../environments/environment';
 import { reducersProvider } from './store/avatar.reducers';
-import { AvatarStoreState, AvatarStoreSelectors } from './store';
+import { ClientAStoreState, ClientAStoreSelectors } from './store';
 import { Store, select } from '@ngrx/store';
 import { takeUntil } from 'rxjs/operators';
 
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private _unsubscribe$: Subject<void> = new Subject();
 
-  @Input('state') 
+  @Input('state')
   set state(state: string) {
     console.debug('client-a received state', state);
   }
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
   @Output('cool-event') coolEvent = new EventEmitter<any>();
 
   constructor(
-    private store$: Store<AvatarStoreState.State>,
+    private store$: Store<ClientAStoreState.State>,
     private router: Router) {
   }
 
@@ -47,10 +47,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.store$.pipe(
       takeUntil(this._unsubscribe$),
-      select(AvatarStoreSelectors.selectAvatarState)
+      select(ClientAStoreSelectors.selectAvatarState)
     ).subscribe(data => {
       console.log(data);
-      setTimeout(() => { 
+      setTimeout(() => {
         this.emitState({
           name: 'client',
           data: reducersProvider
@@ -59,10 +59,10 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     // just for demonstration!
-    // setTimeout(() => { 
+    // setTimeout(() => {
     //   // this.message.next('client a initialized!');
     // }, 2000);
-    
+
   }
 
   ngOnDestroy(): void {

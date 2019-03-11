@@ -1,11 +1,11 @@
-import * as AvatarStoreActions from './actions';
-import * as AvatarStoreSelectors from './avatar.selectors';
-import * as AvatarStoreState from './avatar.state';
+import * as ClientAStoreActions from './actions';
+import * as ClientAStoreSelectors from './avatar.selectors';
+import * as ClientAStoreState from './avatar.state';
 import { ClientAStoreModule } from './avatar-store.module';
 
 export {
   ClientAStoreModule,
-  AvatarStoreActions,
-  AvatarStoreSelectors,
-  AvatarStoreState
+  ClientAStoreActions,
+  ClientAStoreSelectors,
+  ClientAStoreState
 };
